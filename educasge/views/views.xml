@@ -1,0 +1,177 @@
+<odoo>
+    <data>
+
+        <!-- actions opening views on models -->
+
+        <record model="ir.actions.act_window" id="educasge.action_window">
+            <field name="name">educasge window</field>
+            <field name="res_model">educasge.educasge</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
+        <!--    -->
+        <!-- vista de lista, tree -->
+
+        <record model="ir.ui.view" id="educasge.list">
+            <field name="name">educasge list</field>
+            <field name="model">educasge.educasge</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="nombre"/>
+                    <field name="sexo"/>
+                    <field name="nacionalidad"/>
+                    <field name="idioma"/>
+                    <field name="categoria"/>
+                    <field name="usuario"/>
+                    <field name="fechaNacimiento"/>
+                    <field name="telefono"/>
+                    <field name="direccion"/>
+                </tree>
+            </field>
+        </record>
+        <!--vista formulario    -->
+
+        <record model="ir.ui.view" id="view_educasge_form">
+            <field name='name'>view.educasge.form</field>
+            <field name="model">educasge.educasge</field>
+            <field name="arch" type="xml">
+                <form string="alumno form">
+                    <sheet>
+                        <!--La foto a la izquierda-->
+                        <field name="photo" widget="image" class="oe_left oe_avatar"/>
+                        <!-- DIV para poner el nombre y el apellido -->
+                        <div class="oe_title">
+                            <h1>
+                                <table>
+                                    <tr>
+                                        <td style="padding-right:10px;">
+                                            <field name="nombre" required="1" placeholder="Nombre"/>
+                                        </td>
+                                        <td style="padding-right:10px;">
+                                            <field name="apellido" placeholder="Apellido"/>
+                                        </td>
+
+                                    </tr>
+                                </table>
+                            </h1>
+                        </div>
+                        <notebook colspan="4">
+
+                            <page string="Información Personal">
+                                <group col="4" colspan="4"
+                                       name="detalle_personal">
+                                    <field name="sexo"/>
+                                    <field name="nacionalidad"/>
+                                    <field name="idioma"/>
+                                    <field name="categoria"/>
+                                    <field name="usuario"/>
+                                    <field name="fechaNacimiento"/>
+                                    <field name="telefono"/>
+                                </group>
+
+                                <group string="Detalles direccion">
+                                    <field name="direccion"/>
+                                </group>
+
+                                <!--                   <field name="value"/>
+                                                       <field name="value2"/>
+                                 -->
+                            </page>
+                            <page string="Datos académicos">
+                                <group col="4" colspan="4"
+                                       name="detalle_academico">
+                                    <field name="matricula"></field>
+                                    <field name="curso"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--vista Kanban -->
+        <record model="ir.ui.view" id="kanban_view_student">
+            <field name='name'>Kanban estudiantes</field>
+            <field name="model">educasge.educasge</field>
+            <field name="arch" type="xml">
+                <kanban class="o_hr_employee_kanban">
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <div class="o_kanban_image">
+                                    <a type="open">
+                                        <img t-att-src="kanban_image('educasge.educasge', 'photo', record.id.value)"
+                                             class="oe_employee_picture"/>
+                                    </a>
+                                </div>
+                                <div class="oe_kanban_details">
+                                    <h4>
+                                        <a type="open">
+                                            <field name="nombre"/>
+                                            <t t-if="record.apellido.raw_value">
+                                                <field name="apellido"/>
+                                            </t>
+                                        </a>
+                                    </h4>
+                                    <ul>
+                                        <li t-if="record.direccion.raw_value">
+                                            Dirección:
+                                            <field name="direccion"/>
+                                        </li>
+                                        <li t-if="record.telefono.raw_value">
+                                            Tel:
+                                            <field name="telefono"/>
+                                        </li>
+
+                                        <li t-if="record.idioma.raw_value">
+                                            Idioma:
+                                            <field name="idioma"/>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <script>$('.oe_employee_picture').load(function() {
+                                if($(this).width() > $(this).height()) {
+                                $(this).addClass('oe_employee_picture_wide') } });
+                            </script>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- server action to the one above -->
+        <!--
+          <record model="ir.actions.server" id="educasge.action_server">
+            <field name="name">educasge server</field>
+            <field name="model_id" ref="model_educasge_educasge"/>
+            <field name="code">
+              action = {
+                "type": "ir.actions.act_window",
+                "view_mode": "tree,form",
+                "res_model": self._name,
+              }
+            </field>
+          </record>
+         -->
+
+        <!-- Top menu item -->
+
+        <menuitem name="educasge" id="educasge.menu_root"/>
+        <!--    -->
+        <!-- menu categories -->
+
+        <menuitem name="Alumnos" id="educasge.alumnos" parent="educasge.menu_root"/>
+        <!--<menuitem name="Menu 2" id="educasge.menu_2" parent="educasge.menu_root"/>
+           -->
+        <!--    -->
+        <!-- actions -->
+
+        <menuitem name="Listado" id="educasge.menu_1_list" parent="educasge.alumnos"
+                  action="educasge.action_window"/>
+        <!-- <menuitem name="Server to list" id="educasge" parent="educasge.menu_2"
+                  action="educasge.action_server"/>
+            -->
+        <!--   -->
+    </data>
+</odoo>
