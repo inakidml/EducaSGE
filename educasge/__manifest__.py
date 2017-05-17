@@ -11,8 +11,8 @@
          multiplataforma.
     """,
 
-    'author': "Iñaki Diaz",
-    'website': "http://www.IñakiDiaz.com",
+    'author': "Iñaki",
+    'website': "http://www.Iñaki.com",
 
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/master/odoo/addons/base/module/module_data.xml

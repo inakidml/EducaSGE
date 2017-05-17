@@ -4,12 +4,19 @@
         <!-- actions opening views on models -->
 
         <record model="ir.actions.act_window" id="educasge.action_window">
-            <field name="name">educasge window</field>
+            <field name="name">Alumnos</field>
             <field name="res_model">educasge.educasge</field>
             <field name="view_mode">kanban,tree,form</field>
         </record>
-        <!--    -->
-        <!-- vista de lista, tree -->
+
+        <record model="ir.actions.act_window" id="educasge.action_window_cursos">
+            <field name="name">Cursos</field>
+            <field name="res_model">educasge.cursos</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <!--  -->
+
+        <!-- vista de lista, tree alumno-->
 
         <record model="ir.ui.view" id="educasge.list">
             <field name="name">educasge list</field>
@@ -28,7 +35,22 @@
                 </tree>
             </field>
         </record>
-        <!--vista formulario    -->
+
+        <!--  vista de lista, tree curso -->
+
+        <record model="ir.ui.view" id="view_cursos_list">
+            <field name="name">cursos.list</field>
+            <field name="model">educasge.cursos</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="nombre"/>
+                    <field name="horas"/>
+                    <field name="descripcion"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--vista formulario   alumnos -->
 
         <record model="ir.ui.view" id="view_educasge_form">
             <field name='name'>view.educasge.form</field>
@@ -55,7 +77,6 @@
                             </h1>
                         </div>
                         <notebook colspan="4">
-
                             <page string="Información Personal">
                                 <group col="4" colspan="4"
                                        name="detalle_personal">
@@ -72,22 +93,57 @@
                                     <field name="direccion"/>
                                 </group>
 
-                                <!--                   <field name="value"/>
-                                                       <field name="value2"/>
-                                 -->
                             </page>
-                            <page string="Datos académicos">
-                                <group col="4" colspan="4"
-                                       name="detalle_academico">
-                                    <field name="matricula"></field>
-                                    <field name="curso"/>
+
+                            <page name="cursos" string="Cursos">
+
+                                <group>
+                                    <separator string="Matriculaciones"
+                                               colspan="4"/>
+                                    <tree string="Detalles cursos">
+                                        <!--<field name="cursos_id"/>-->
+                                        <!--<field name="nota"/>-->
+                                    </tree>
+                                    <form>
+                                        <group cols="2" colspan="2">
+                                       <!--     <field name="cursos_id"/>
+                                            <field name="nota"/>-->
+                                        </group>
+                                    </form>
                                 </group>
                             </page>
+
+
                         </notebook>
                     </sheet>
                 </form>
             </field>
         </record>
+
+
+        <!--vista formulario   cursos   -->
+
+        <record model="ir.ui.view" id="view_cursos_form">
+            <field name='name'>cursos.form</field>
+            <field name="model">educasge.cursos</field>
+            <field name="arch" type="xml">
+                <form string="cursos form">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                Añadir Curso
+                            </h1>
+                        </div>
+                        <group col="4" colspan="4">
+                            <field name="nombre"/>
+                            <field name="horas"/>
+                            <field name="descripcion"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
 
         <!--vista Kanban -->
         <record model="ir.ui.view" id="kanban_view_student">
@@ -158,20 +214,26 @@
         <!-- Top menu item -->
 
         <menuitem name="educasge" id="educasge.menu_root"/>
+
         <!--    -->
         <!-- menu categories -->
 
-        <menuitem name="Alumnos" id="educasge.alumnos" parent="educasge.menu_root"/>
-        <!--<menuitem name="Menu 2" id="educasge.menu_2" parent="educasge.menu_root"/>
-           -->
+        <menuitem name="Educasge" id="educasge.educasge" parent="educasge.menu_root"/>
+
+
         <!--    -->
         <!-- actions -->
 
-        <menuitem name="Listado" id="educasge.menu_1_list" parent="educasge.alumnos"
+        <menuitem name="Alumnos" id="educasge.menu_1_list" parent="educasge.educasge"
                   action="educasge.action_window"/>
-        <!-- <menuitem name="Server to list" id="educasge" parent="educasge.menu_2"
-                  action="educasge.action_server"/>
-            -->
+
+        <menuitem name="Cursos" id="educasge.menu_2_list" parent="educasge.educasge"
+                  action="educasge.action_window_cursos"/>
+
+        <!--
+                  <menuitem name="Server to list" id="educasge" parent="educasge.menu_2"
+                         action="educasge.action_server"/>
+                   -->
         <!--   -->
     </data>
 </odoo>
