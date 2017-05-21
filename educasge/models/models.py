@@ -20,7 +20,7 @@ class educasge(models.Model):
     fechaNacimiento = fields.Date('Cumpleaños')
     telefono = fields.Char()
     direccion = fields.Char('Dirección')
-    #alumnoCursoIds = fields.One2many('educasge.alumnoscursos', 'alumno_id', string='Notas cursos')
+    alumnocursoids = fields.One2many('educasge.alumnoscursos', 'educasge_id', 'Notas cursos')
 
 
 class cursos(models.Model):
@@ -33,11 +33,11 @@ class cursos(models.Model):
 
 class educasgealumnoscursos(models.Model):
     _name = 'educasge.alumnoscursos'
-    _description = 'tabla intermedia'
 
-    alumno_id = fields.Many2one('educasge.educasge', string='Alumno', ondelete="cascade")
-    cursos_id = fields.Many2one('educasge.cursos', string='Curso')
-    nota = fields.char('Nota')
+    educasge_id = fields.Many2one('educasge.educasge', 'Alumno', ondelete="cascade")
+    cursos_id = fields.Many2one('educasge.cursos', 'Curso')
+    nombre = fields.Many2one('educasge.cursos', 'Nombre')
+    nota = fields.Char();
 
     #     value = fields.Integer()
     #     value2 = fields.Float(compute="_value_pc", store=True)

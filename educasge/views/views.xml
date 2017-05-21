@@ -100,16 +100,18 @@
                                 <group>
                                     <separator string="Matriculaciones"
                                                colspan="4"/>
+                                <field name="alumnocursoids" nolabel="1">
                                     <tree string="Detalles cursos">
-                                        <!--<field name="cursos_id"/>-->
-                                        <!--<field name="nota"/>-->
+                                       <field name="nombre"/>
+                                        <field name="nota"/>
                                     </tree>
                                     <form>
                                         <group cols="2" colspan="2">
-                                       <!--     <field name="cursos_id"/>
-                                            <field name="nota"/>-->
+                                            <field name="nombre"/>
+                                            <field name="nota"/>
                                         </group>
                                     </form>
+                                </field>
                                 </group>
                             </page>
 
