@@ -43,7 +43,7 @@
             <field name="model">educasge.cursos</field>
             <field name="arch" type="xml">
                 <tree>
-                    <field name="nombre"/>
+                    <field name="name"/>
                     <field name="horas"/>
                     <field name="descripcion"/>
                 </tree>
@@ -84,7 +84,7 @@
                                     <field name="nacionalidad"/>
                                     <field name="idioma"/>
                                     <field name="categoria"/>
-                                    <field name="usuario"/>
+                                    <field name="dni"/>
                                     <field name="fechaNacimiento"/>
                                     <field name="telefono"/>
                                 </group>
@@ -102,12 +102,12 @@
                                                colspan="4"/>
                                 <field name="alumnocursoids" nolabel="1">
                                     <tree string="Detalles cursos">
-                                       <field name="nombre"/>
+                                       <field name="cursos_id"/>
                                         <field name="nota"/>
                                     </tree>
                                     <form>
                                         <group cols="2" colspan="2">
-                                            <field name="nombre"/>
+                                            <field name="cursos_id"/>
                                             <field name="nota"/>
                                         </group>
                                     </form>
@@ -137,7 +137,7 @@
                             </h1>
                         </div>
                         <group col="4" colspan="4">
-                            <field name="nombre"/>
+                            <field name="name"/>
                             <field name="horas"/>
                             <field name="descripcion"/>
                         </group>
@@ -176,6 +176,7 @@
                                             Dirección:
                                             <field name="direccion"/>
                                         </li>
+
                                         <li t-if="record.telefono.raw_value">
                                             Tel:
                                             <field name="telefono"/>
@@ -185,6 +186,12 @@
                                             Idioma:
                                             <field name="idioma"/>
                                         </li>
+
+                                        <li t-if="record.dni.raw_value">
+                                            DNI:
+                                            <field name="dni"/>
+                                        </li>
+
                                     </ul>
                                 </div>
                             </div>
